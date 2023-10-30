@@ -4,6 +4,7 @@ import React from "react";
 import { Inter, Space_Grotesk } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
+import { ThemeProvider } from "../context/themeProvider";
 export const metadata: Metadata = {
   title: "CodeOverflow",
   description:
@@ -29,20 +30,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider
-      appearance={{
-        elements: {
-          formButtonPrimary: "primary-gradient",
-          footerActionLink: "primary-text-gradient hover: text-promary-500",
-        },
-      }}
-    >
-      <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
-        <body>
-          <h1 className="h1-bold">Hello</h1>
-          {children}
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
+      <body>
+        <ClerkProvider
+          appearance={{
+            elements: {
+              formButtonPrimary: "primary-gradient",
+              footerActionLink: "primary-text-gradient hover: text-promary-500",
+            },
+          }}
+        >
+          <ThemeProvider>{children}</ThemeProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }
